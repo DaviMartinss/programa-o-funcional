@@ -20,4 +20,28 @@ main = do
         then putStrLn ("O resultado é: " ++ addSum s)
         else putStrLn "Erro: entrada inválida."
 
--- #############################################################################################
+-- Q3 #############################################################################################
+
+-- função que verifica se o caractere é uma vogal
+isVogal :: Char -> Bool
+isVogal s = elem s "aeiou" -- pode ter vogais maiúsculas?
+
+-- função que verifica se o caractere é uma consoante
+isConsoante :: Char -> Bool
+isConsoante s = elem s ['A'..'Z']
+
+--função que conta a quantidade de vogais
+contaVogais :: String -> Int 
+contaVogais s = length $ filter isVogal s
+
+--função que conta a quantidade de consoantes
+contaConsoantes :: String -> Int 
+contaConsoantes s = length $ filter isConsoante s
+
+--função que verifica se a String tem de 4 à 8 caracteres
+validaCaracteres :: String -> Bool
+validaCaracteres s = and [length s >= 4, length s <= 8]
+
+-- função que valida a senha de acesso
+validaSenha :: String -> Bool
+validaSenha s = validaCaracteres s && contaVogais s == 2 && contaConsoantes s == 2
