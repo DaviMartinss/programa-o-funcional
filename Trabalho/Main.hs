@@ -1,3 +1,4 @@
+-- Q1 #######################################################################################
 import Data.Char (isDigit) -- importando a função isDigit do módulo Data.Char
 
 getDigito :: Char -> Int
@@ -18,3 +19,5 @@ main = do
     if length s == 8 && isDigitString s
         then putStrLn ("O resultado é: " ++ addSum s)
         else putStrLn "Erro: entrada inválida."
+
+-- #############################################################################################
