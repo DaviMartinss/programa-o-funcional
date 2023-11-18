@@ -1,2 +1,2 @@
 # programação funcional
-Trabalho prática de Programação Funcional
+Trabalho prático de Programação Funcional
