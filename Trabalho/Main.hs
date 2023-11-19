@@ -1,4 +1,4 @@
--- Q1 #######################################################################################
+-- Q1 ##############################################################################################
 import Data.Char (isDigit) -- importando a função isDigit do módulo Data.Char
 
 getDigito :: Char -> Int
@@ -12,13 +12,17 @@ isDigitString :: String -> Bool -- definindo o tipo da função isDigitString
 isDigitString s = all isDigit s --usando a função all para aplicar isDigit em todos os caracteres da string s
 
 -- Função principal que recebe a entrada do teclado e chama a função addSum
-main :: IO ()
-main = do
-    putStrLn "Digite uma string de oito dígitos:"
-    s <- getLine
-    if length s == 8 && isDigitString s
-        then putStrLn ("O resultado é: " ++ addSum s)
-        else putStrLn "Erro: entrada inválida."
+
+-- Q2 #############################################################################################
+validaCartao :: String -> Bool
+validaCartao numCartao
+    | not (isDigitString numCartao) = False -- Verifica se todos os digitos são numéricos
+    | (length numCartao) /= 10 = False -- Verifica a quantidade de dígitos para validar
+    | otherwise = somaOitoDigitos == resultadoVerificadores
+        where
+            (significativos, verificadores) = splitAt 8 numCartao -- Dividi os significativos e verificadores
+            somaOitoDigitos = sum (map getDigito significativos) -- Somando os significativos
+            resultadoVerificadores = read verificadores :: Int -- Convertendo o valor da string para um valor inteiro
 
 -- Q3 #############################################################################################
 
@@ -45,3 +49,13 @@ validaCaracteres s = and [length s >= 4, length s <= 8]
 -- função que valida a senha de acesso
 validaSenha :: String -> Bool
 validaSenha s = validaCaracteres s && contaVogais s == 2 && contaConsoantes s == 2
+
+
+-- Função Main ##############################################################################
+main :: IO ()
+main = do
+    putStrLn "Digite um identificador de cartão:"
+    s <- getLine
+    if validaCartao s
+        then putStrLn ("O identificador de cartão " ++ s ++ " é válido!")
+        else putStrLn "O identificador de cartão é inválido!"
