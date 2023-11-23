@@ -6,7 +6,11 @@ getDigito c = read [c]
 
 -- Função que adiciona a soma dos dígitos ao final de uma string de oito dígitos
 addSum :: String -> String
-addSum s = s ++ show (sum (map getDigito s))
+addSum s = s ++ verificaSoma
+    where
+        somaOitoDigitos = sum (map getDigito s)
+        verificaSoma = if somaOitoDigitos < 10 then 
+            "0" ++ show somaOitoDigitos else show somaOitoDigitos
 
 isDigitString :: String -> Bool -- definindo o tipo da função isDigitString
 isDigitString s = all isDigit s --usando a função all para aplicar isDigit em todos os caracteres da string s
@@ -47,7 +51,7 @@ validaCaracteres s = and [length s >= 4, length s <= 8]
 -- função que valida a senha de acesso
 -- Somente ou pelo menos duas vogais e consoantes ?
 validaSenha :: String -> Bool 
-validaSenha s = validaCaracteres s && contaVogais s == 2 && contaConsoantes s == 2 
+validaSenha s = validaCaracteres s && contaVogais s >= 2 && contaConsoantes s >= 2 
 
 -- Q4 #############################################################################################
 verificaListaSenhas :: [String] -> [String]
